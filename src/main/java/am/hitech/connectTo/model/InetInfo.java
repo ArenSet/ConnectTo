@@ -14,7 +14,7 @@ public class InetInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private int id;
-    
+
     @JsonIgnore
     @Column(name = "name")
     private String name;

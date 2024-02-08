@@ -1,7 +1,9 @@
 package am.hitech.connectTo.controller;
 
 import am.hitech.connectTo.model.InetInfo;
+import am.hitech.connectTo.model.dto.InetInfoRequestDto;
 import am.hitech.connectTo.service.InetInfoService;
+import am.hitech.connectTo.util.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -126,6 +128,27 @@ public class HomePageController {
         return ResponseEntity.ok(inetInfo);
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteInetInfo(@RequestParam String name){
+        inetInfoService.delete(name);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<?> addInetInfo(@RequestBody InetInfoRequestDto requestDto){
+        inetInfoService.add(requestDto);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/inet-info/{id}")
+    public ResponseEntity<?> updateInetInfo(@RequestBody InetInfoRequestDto requestDto,
+                                            @PathVariable(value = "id") int id) throws NotFoundException {
+        inetInfoService.updateInetInfo(requestDto, id);
+
+        return ResponseEntity.ok().build();
+    }
+
     /*@GetMapping("/iphone")
     public ResponseEntity<?> iphone(){
         return null;
@@ -195,4 +218,7 @@ public class HomePageController {
     public ResponseEntity<?> goToBusiness(){
         return null;
     }
+
+
+
 }
