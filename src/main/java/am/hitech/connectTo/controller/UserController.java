@@ -20,11 +20,6 @@ public class UserController {
         return null;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<Void> register(){
-        return null;
-    }
-
     @GetMapping("/account-overview")
     public ResponseEntity<?> accountOverview(){
         return null;

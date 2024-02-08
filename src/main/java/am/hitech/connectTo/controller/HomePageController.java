@@ -15,6 +15,10 @@ public class HomePageController {
     @Autowired
     private InetInfoService inetInfoService;
 
+    @PostMapping("/register")
+    public ResponseEntity<Void> register(){
+        return null;
+    }
     @PostMapping("/pay-without-sign-in")
     public ResponseEntity<?> payWithoutSignIn(){
         return null;
