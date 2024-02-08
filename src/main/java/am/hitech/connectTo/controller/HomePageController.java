@@ -15,31 +15,6 @@ public class HomePageController {
     @Autowired
     private InetInfoService inetInfoService;
 
-    @GetMapping("/account")
-    public ResponseEntity<?> account(){
-        return null;
-    }
-
-    @PostMapping("/sign-in")
-    public ResponseEntity<Void> signIn(){
-        return null;
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<Void> register(){
-        return null;
-    }
-
-    @GetMapping("/account-overview")
-    public ResponseEntity<?> accountOverview(){
-        return null;
-    }
-
-    @PatchMapping("/manage-profile")
-    public ResponseEntity<?> manageProfile(){
-        return null;
-    }
-
     @PostMapping("/pay-without-sign-in")
     public ResponseEntity<?> payWithoutSignIn(){
         return null;
@@ -47,11 +22,6 @@ public class HomePageController {
 
     @GetMapping("/view-and-pay")
     public ResponseEntity<?> viewAndPay(){
-        return null;
-    }
-
-    @PatchMapping("/account-type")
-    public ResponseEntity<?> accountType(){
         return null;
     }
 

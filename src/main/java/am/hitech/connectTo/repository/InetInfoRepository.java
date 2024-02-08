@@ -12,5 +12,4 @@ public interface InetInfoRepository extends JpaRepository<InetInfo, Integer> {
     @Modifying
     void deleteByName(String name);
 
-    /*InetInfo findById(int id);*/
 }

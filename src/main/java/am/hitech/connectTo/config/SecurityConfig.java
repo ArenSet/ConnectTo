@@ -43,7 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webjars/**",
                         "/swagger-resources/**",
                         "/v3/api-docs/**",
-                        "/crm-ws/**");
+                        "/crm-ws/**")
+                .antMatchers("/api/home-page/pay-without-sign-in");
     }
 
     @Override
@@ -65,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-resources/**",
                         "/v3/api-docs/**",
                         "/crm-ws/**").permitAll()
+                .antMatchers("/api/home-page/pay-without-sign-in").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
