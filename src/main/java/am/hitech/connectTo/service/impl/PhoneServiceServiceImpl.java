@@ -37,7 +37,7 @@ public class PhoneServiceServiceImpl implements PhoneServiceService {
     @Transactional
     @Override
     public void updatePhoneService(PhoneServiceRequestDto requestDto, int id) throws NotFoundException {
-        PhoneService phoneService = phoneServiceRepository.findById(id).orElseThrow(() -> new NotFoundException("There is no any inet info with that id"));
+        PhoneService phoneService = phoneServiceRepository.findById(id).orElseThrow(() -> new NotFoundException("There is no any phone service with that id"));
         if (requestDto.getName() != null){
             phoneService.setServiceName(requestDto.getName());
         }
