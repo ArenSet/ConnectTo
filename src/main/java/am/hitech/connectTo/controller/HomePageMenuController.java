@@ -2,11 +2,14 @@ package am.hitech.connectTo.controller;
 
 import am.hitech.connectTo.model.HomePageMenu;
 import am.hitech.connectTo.model.dto.HomePageMenuRequestDto;
+import am.hitech.connectTo.model.dto.HomePageResponseDto;
 import am.hitech.connectTo.service.HomePageMenuService;
 import am.hitech.connectTo.util.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/home-page-menu")
@@ -42,5 +45,26 @@ public class HomePageMenuController {
         homePageMenuService.updateHomePageMenu(requestDto, id);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<?> getAll(){
+        List<HomePageResponseDto> homePageMenus = homePageMenuService.getAll();
+
+        return ResponseEntity.ok(homePageMenus);
+    }
+
+    @GetMapping("/authenticated")
+    public ResponseEntity<?> authenticated(){
+        List<HomePageResponseDto> homePageMenus = homePageMenuService.authenticated();
+
+        return ResponseEntity.ok(homePageMenus);
+    }
+
+    @GetMapping("/not-authenticated")
+    public ResponseEntity<?> notAuthenticated(){
+        List<HomePageResponseDto> homePageMenus = homePageMenuService.notAuthenticated();
+
+        return ResponseEntity.ok(homePageMenus);
     }
 }

@@ -45,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v3/api-docs/**",
                         "/crm-ws/**")
                 .antMatchers("/api/home-page/pay-without-sign-in")
-                .antMatchers("/api/home-page/register");
+                .antMatchers("/api/home-page/register")
+                .antMatchers("/api/home-page-menu/not-authenticated");
     }
 
     @Override
@@ -69,6 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/crm-ws/**").permitAll()
                 .antMatchers("/api/home-page/pay-without-sign-in").permitAll()
                 .antMatchers("/api/home-page/register").permitAll()
+                .antMatchers("/api/home-page-menu/not-authenticated").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
