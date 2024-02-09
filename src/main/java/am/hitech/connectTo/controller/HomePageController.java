@@ -90,12 +90,6 @@ public class HomePageController {
         return ResponseEntity.ok(inetInfo);
     }
 
-    @GetMapping("/phone-service")
-    public ResponseEntity<?> phoneService(){
-        InetInfo inetInfo = inetInfoService.getInfo("phone_service_info");
-        return ResponseEntity.ok(inetInfo);
-    }
-
     @GetMapping("/inet-100mb")
     public ResponseEntity<?> inetUpTo100Mb(){
         InetInfo inetInfo = inetInfoService.getInfo("inet_100mb_info");
