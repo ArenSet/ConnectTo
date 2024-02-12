@@ -30,7 +30,8 @@ public class ServiceCustomerServiceImpl implements ServiceCustomerService {
     }
 
     @Override
-    public void delete(int id){
+    public void delete(int id) throws NotFoundException {
+        ServiceCustomer serviceCustomer = repository.findById(id).orElseThrow(() -> new NotFoundException("There is no any service with that id"));
         repository.deleteById(id);
     }
 

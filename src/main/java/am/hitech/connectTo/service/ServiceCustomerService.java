@@ -14,7 +14,7 @@ public interface ServiceCustomerService {
 
     void addNew(ServiceCustomerRequestDto requestDto);
 
-    void delete(int id);
+    void delete(int id) throws NotFoundException;
 
     List<ServiceCustomerResponseDto> getAll();
 

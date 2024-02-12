@@ -26,7 +26,7 @@ public class ServiceCustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable(value = "id") int id){
+    public ResponseEntity<?> delete(@PathVariable(value = "id") int id) throws NotFoundException {
         serviceCustomerService.delete(id);
         return ResponseEntity.ok().build();
     }
