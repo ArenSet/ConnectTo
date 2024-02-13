@@ -7,6 +7,8 @@ import am.hitech.connectTo.repository.ServiceCustomerRepository;
 import am.hitech.connectTo.service.ServiceCustomerService;
 import am.hitech.connectTo.util.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +21,12 @@ public class ServiceCustomerServiceImpl implements ServiceCustomerService {
     @Autowired
     private ServiceCustomerRepository repository;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
     @Override
     public ServiceCustomerResponseDto getByPosition(int position){
+        sendEmail("setaghyan.aren@gmail.com", "Service", repository.findByPosition(position).toString());
         return modelToDto(repository.findByPosition(position));
     }
 
@@ -83,5 +89,14 @@ public class ServiceCustomerServiceImpl implements ServiceCustomerService {
         responseDto.setIcon(serviceCustomer.getIcon());
 
         return responseDto;
+    }
+
+
+    public void sendEmail(String to, String subject, String body){
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(body);
+        mailSender.send(message);
     }
 }
