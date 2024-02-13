@@ -26,7 +26,6 @@ public class ServiceCustomerServiceImpl implements ServiceCustomerService {
 
     @Override
     public ServiceCustomerResponseDto getByPosition(int position){
-        sendEmail("setaghyan.aren@gmail.com", "Service", repository.findByPosition(position).toString());
         return modelToDto(repository.findByPosition(position));
     }
 
@@ -89,14 +88,5 @@ public class ServiceCustomerServiceImpl implements ServiceCustomerService {
         responseDto.setIcon(serviceCustomer.getIcon());
 
         return responseDto;
-    }
-
-
-    public void sendEmail(String to, String subject, String body){
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(body);
-        mailSender.send(message);
     }
 }
