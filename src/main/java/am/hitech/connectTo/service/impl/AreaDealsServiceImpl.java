@@ -3,6 +3,7 @@ package am.hitech.connectTo.service.impl;
 import am.hitech.connectTo.model.AreaDeals;
 import am.hitech.connectTo.repository.AreaDealsRepository;
 import am.hitech.connectTo.service.AreaDealsService;
+import am.hitech.connectTo.util.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -34,6 +35,13 @@ public class AreaDealsServiceImpl implements AreaDealsService {
 
         areaDealsRepository.save(areaDeals);
 
+    }
+
+    @Override
+    @Transactional
+    public void delete(int id) throws NotFoundException {
+        AreaDeals areaDeals = areaDealsRepository.findById(id).orElseThrow(() ->new NotFoundException("There is no any deal with that id"));
+        areaDealsRepository.delete(areaDeals);
     }
 
 

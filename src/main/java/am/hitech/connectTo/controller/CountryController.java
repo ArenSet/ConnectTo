@@ -7,6 +7,7 @@ import am.hitech.connectTo.service.AreaDealsService;
 import am.hitech.connectTo.service.CountryService;
 import am.hitech.connectTo.service.StateService;
 import am.hitech.connectTo.service.ZipCodeService;
+import am.hitech.connectTo.util.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,12 @@ public class CountryController {
                                         @PathVariable(value = "service") String service,
                                         @PathVariable(value = "email") String email){
         areaDealsService.addNewDeal(country, state, zopCode, service, email);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value = "id") int id) throws NotFoundException {
+        areaDealsService.delete(id);
         return ResponseEntity.ok().build();
     }
 }
