@@ -21,9 +21,6 @@ public class ServiceCustomerServiceImpl implements ServiceCustomerService {
     @Autowired
     private ServiceCustomerRepository repository;
 
-    @Autowired
-    private JavaMailSender mailSender;
-
     @Override
     public ServiceCustomerResponseDto getByPosition(int position){
         return modelToDto(repository.findByPosition(position));
