@@ -23,7 +23,10 @@ public class ZipCodeServiceImpl implements ZipCodeService {
     @Override
     public ZipCode findById(int id) throws NotFoundException {
 
-            ZipCode zipCode = zipCodeRepository.findById(id).orElseThrow(() -> new NotFoundException("jlsfn"));
+            ZipCode zipCode = zipCodeRepository.getById(id);
+            if (zipCode == null){
+                throw new NotFoundException("ksldjn");
+            }
             return zipCode;
 
 
