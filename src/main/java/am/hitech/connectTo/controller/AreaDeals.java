@@ -1,6 +1,5 @@
 package am.hitech.connectTo.controller;
 
-import am.hitech.connectTo.model.AreaDeals;
 import am.hitech.connectTo.model.Country;
 import am.hitech.connectTo.model.State;
 import am.hitech.connectTo.model.ZipCode;
@@ -17,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/country")
-public class CountryController {
+public class AreaDeals {
 
     @Autowired
     private CountryService countryService;
