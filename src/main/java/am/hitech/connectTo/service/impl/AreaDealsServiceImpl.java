@@ -29,7 +29,7 @@ public class AreaDealsServiceImpl implements AreaDealsService {
     @Autowired
     private ZipCodeService zipCodeService;
 
-    @Resource
+    @Autowired
     private ServiceCustomerService serviceCustomerService;
 
     @Autowired
