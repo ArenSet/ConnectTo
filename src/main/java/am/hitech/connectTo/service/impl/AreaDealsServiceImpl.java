@@ -1,8 +1,8 @@
 package am.hitech.connectTo.service.impl;
 
-import am.hitech.connectTo.model.AreaDeals;
-import am.hitech.connectTo.repository.AreaDealsRepository;
-import am.hitech.connectTo.service.AreaDealsService;
+import am.hitech.connectTo.model.*;
+import am.hitech.connectTo.repository.*;
+import am.hitech.connectTo.service.*;
 import am.hitech.connectTo.util.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -17,18 +17,51 @@ public class AreaDealsServiceImpl implements AreaDealsService {
     private AreaDealsRepository areaDealsRepository;
 
     @Autowired
+    private CountryService countryService;
+
+    @Autowired
+    private StateService stateService;
+
+    @Autowired
+    private ZipCodeService zipCodeService;
+
+    @Autowired
+    private ServiceCustomerService serviceCustomerService;
+
+    @Autowired
     private JavaMailSender mailSender;
 
     @Override
     @Transactional
-    public void addNewDeal(String country, String state, String zipCode, String service, String email){
+    public void addNewDeal(int countryId, int stateId, int zipCodeId, int serviceId, String email) throws NotFoundException {
 
         AreaDeals areaDeals = new AreaDeals();
-        areaDeals.setCountry(country);
-        areaDeals.setState(state);
-        areaDeals.setZipCode(zipCode);
-        areaDeals.setService(service);
-        areaDeals.setEmail(email);
+
+        Country country = countryService.findById(countryId);
+
+        State state = stateService.findById(stateId);
+
+        ZipCode zipCode = zipCodeService.findById(zipCodeId);
+
+        ServiceCustomer serviceCustomer = serviceCustomerService.findById(serviceId);
+
+
+        areaDeals.setCountry(country.getCountry());
+
+        if (state.getCountryId() == countryId){
+            areaDeals.setState(state.getState());
+        }
+
+        if (zipCode.getStateId() == stateId){
+            areaDeals.setZipCode(zipCode.getZipCode());
+        }
+
+        areaDeals.setService(serviceCustomer.getDesc());
+
+        if (email.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$")){
+            areaDeals.setEmail(email);
+        }
+
 
         sendEmail(email,"Thank you", "Congratulations, we well contact you soon.");
         sendEmail("setaghyan.aren@gmail.com", "New area deals", areaDeals.toString());

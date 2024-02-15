@@ -20,11 +20,14 @@ public class State {
     @Column(name = "state")
     private String state;
 
-    @JsonIgnore
+    @Column(name = "country_id")
+    private int countryId;
+
+    /*@JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
-    private Country country;
+    private Country country;*/
 
-    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL)
-    List<ZipCode> zipCodes;
+    /*@OneToMany(mappedBy = "state", cascade = CascadeType.ALL)
+    List<ZipCode> zipCodes;*/
 }

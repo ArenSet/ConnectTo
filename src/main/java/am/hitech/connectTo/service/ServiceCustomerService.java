@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface ServiceCustomerService {
+    ServiceCustomer findById(int id) throws NotFoundException;
+
     ServiceCustomerResponseDto getByPosition(int position);
 
     void addNew(ServiceCustomerRequestDto requestDto);

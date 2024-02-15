@@ -3,6 +3,7 @@ package am.hitech.connectTo.controller;
 import am.hitech.connectTo.model.AreaDeals;
 import am.hitech.connectTo.model.Country;
 import am.hitech.connectTo.model.State;
+import am.hitech.connectTo.model.ZipCode;
 import am.hitech.connectTo.service.AreaDealsService;
 import am.hitech.connectTo.service.CountryService;
 import am.hitech.connectTo.service.StateService;
@@ -12,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/{country}")
+@RequestMapping("/api/country")
 public class CountryController {
 
     @Autowired
@@ -29,28 +32,30 @@ public class CountryController {
     private AreaDealsService areaDealsService;
 
     @GetMapping
-    public ResponseEntity<?> getByCountry(@PathVariable(value = "country") String country){
-        Country country1 = countryService.getByCountry(country);
-
-        return ResponseEntity.ok(stateService.findByCountryId(country1.getId()));
+    public ResponseEntity<List<Country>> countries(){
+        return ResponseEntity.ok(countryService.findAll());
     }
 
-    @GetMapping("/{state}")
-    public ResponseEntity<?> getByState(@PathVariable(value = "state") String state,
-                                        @PathVariable(value = "country") String country){
-        State state1 = stateService.findByState(state);
-
-        return ResponseEntity.ok(zipCodeService.findByStateId(state1.getId()));
+    @GetMapping("/state")
+    public ResponseEntity<List<State>> states(@RequestParam int countryId){
+        return ResponseEntity.ok(stateService.findByCountryId(countryId));
     }
 
-    @PostMapping("/{state}/{zipCode}/{service}/{email}")
-    public ResponseEntity<?> addNewArea(@PathVariable(value = "country") String country,
-                                        @PathVariable(value = "state") String state,
-                                        @PathVariable(value = "zipCode") String zopCode,
-                                        @PathVariable(value = "service") String service,
-                                        @PathVariable(value = "email") String email){
-        areaDealsService.addNewDeal(country, state, zopCode, service, email);
+    @GetMapping("/zip-code")
+    public ResponseEntity<List<ZipCode>> zipCodes(@RequestParam int stateId,
+                                                  @RequestParam(required = false) String zipCode){
+        return ResponseEntity.ok(zipCodeService.findByStateId(stateId, zipCode));
+    }
+
+    @PostMapping
+    public ResponseEntity<?> addNewArea(@RequestParam int countryId,
+                                        @RequestParam int stateId,
+                                        @RequestParam int zipCodeId,
+                                        @RequestParam int serviceId,
+                                        @RequestParam String email) throws NotFoundException {
+        areaDealsService.addNewDeal(countryId, stateId, zipCodeId, serviceId, email);
         return ResponseEntity.ok().build();
+
     }
 
     @DeleteMapping("/{id}")

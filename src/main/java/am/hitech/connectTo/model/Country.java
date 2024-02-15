@@ -19,7 +19,8 @@ public class Country {
     @Column(name = "country")
     private String country;
 
+    /*@JsonIgnore
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
-    private List<State> states;
+    private List<State> states;*/
 
 }

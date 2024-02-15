@@ -7,8 +7,6 @@ import am.hitech.connectTo.repository.ServiceCustomerRepository;
 import am.hitech.connectTo.service.ServiceCustomerService;
 import am.hitech.connectTo.util.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +18,14 @@ public class ServiceCustomerServiceImpl implements ServiceCustomerService {
 
     @Autowired
     private ServiceCustomerRepository repository;
+
+    @Override
+    public ServiceCustomer findById(int id) throws NotFoundException {
+        ServiceCustomer serviceCustomer = repository.findById(id).orElseThrow(() ->
+                new NotFoundException("There is no any service with that id"));
+
+        return serviceCustomer;
+    }
 
     @Override
     public ServiceCustomerResponseDto getByPosition(int position){

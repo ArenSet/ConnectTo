@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/login/**")
                 .antMatchers("user/registration/**")
                 .antMatchers("user/forgot/**")
-                .antMatchers("/api/{country}")
+                .antMatchers("/api/country/**")
                 .antMatchers("/swagger-ui/**",
                         "/swagger-ui.html",
                         "/webjars/**",
@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/home-page/pay-without-sign-in").permitAll()
                 .antMatchers("/api/home-page/register").permitAll()
                 .antMatchers("/api/home-page-menu/not-authenticated").permitAll()
-                .antMatchers("/api/{country}/**").permitAll()
+                .antMatchers("/api/country/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
