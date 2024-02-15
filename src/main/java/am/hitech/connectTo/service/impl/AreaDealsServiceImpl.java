@@ -5,10 +5,14 @@ import am.hitech.connectTo.repository.*;
 import am.hitech.connectTo.service.*;
 import am.hitech.connectTo.util.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 @Service
 public class AreaDealsServiceImpl implements AreaDealsService {
@@ -25,7 +29,7 @@ public class AreaDealsServiceImpl implements AreaDealsService {
     @Autowired
     private ZipCodeService zipCodeService;
 
-    @Autowired
+    @Resource
     private ServiceCustomerService serviceCustomerService;
 
     @Autowired

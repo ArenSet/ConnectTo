@@ -1,6 +1,7 @@
 package am.hitech.connectTo.service;
 
 import am.hitech.connectTo.util.exceptions.NotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service

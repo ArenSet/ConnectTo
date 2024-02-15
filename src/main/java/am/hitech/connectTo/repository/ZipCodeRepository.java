@@ -11,7 +11,7 @@ import java.util.List;
 public interface ZipCodeRepository extends JpaRepository<ZipCode, Integer> {
 
 
-    @Query(nativeQuery = true, value = "select * from `zip_code` where `state_id` = ?1 and `zip_code` like concat(?2,'%')")
+    @Query(nativeQuery = true, value = "select * from `zip_code` where `state_id` = ?1 and if(?2 is not null, `zip_code` like lower(concat(?2,'%')), true )")
     List<ZipCode> findByStateId(int stateId, String zipCode);
 
     /*ZipCode findById(int id);*/
