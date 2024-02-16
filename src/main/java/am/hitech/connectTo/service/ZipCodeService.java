@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ZipCodeService {
 
-    List<ZipCode> findByStateId(int stateId, String zipCode);
+    List<ZipCode> findByStateId(int stateId, String zipCode) throws NotFoundException;
 
     ZipCode findById(int id) throws NotFoundException;
 }

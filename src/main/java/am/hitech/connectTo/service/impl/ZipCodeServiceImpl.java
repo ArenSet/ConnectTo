@@ -16,8 +16,12 @@ public class ZipCodeServiceImpl implements ZipCodeService {
     private ZipCodeRepository zipCodeRepository;
 
     @Override
-    public List<ZipCode> findByStateId(int stateId, String zipCode){
-        return zipCodeRepository.findByStateId(stateId, zipCode);
+    public List<ZipCode> findByStateId(int stateId, String zipCode) throws NotFoundException {
+        List<ZipCode> zipCodes = zipCodeRepository.findByStateId(stateId, zipCode);
+        if (zipCodes.size() == 0){
+            throw new NotFoundException("The stateId or the zip code is invalid");
+        }
+        else return zipCodes;
     }
 
     @Override

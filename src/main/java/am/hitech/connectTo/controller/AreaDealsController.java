@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/area-deals")
-public class AreaDeals {
+public class AreaDealsController {
 
     @Autowired
     private CountryService countryService;
@@ -42,7 +42,7 @@ public class AreaDeals {
 
     @GetMapping("/zip-code")
     public ResponseEntity<List<ZipCode>> zipCodes(@RequestParam int stateId,
-                                                  @RequestParam(required = false) String zipCode){
+                                                  @RequestParam(required = false) String zipCode) throws NotFoundException {
         return ResponseEntity.ok(zipCodeService.findByStateId(stateId, zipCode));
     }
 
