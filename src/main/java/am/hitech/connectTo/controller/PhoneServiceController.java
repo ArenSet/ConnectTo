@@ -15,8 +15,8 @@ public class PhoneServiceController {
     @Autowired
     private PhoneServiceService phoneServiceService;
 
-    @GetMapping("/get-info/{name}")
-    public ResponseEntity<?> getPhoneService(@PathVariable(value = "name") String name){
+    @GetMapping
+    public ResponseEntity<?> getPhoneService(@RequestParam String name) throws NotFoundException {
         PhoneService phoneService = phoneServiceService.getByName(name);
         return ResponseEntity.ok(phoneService);
     }

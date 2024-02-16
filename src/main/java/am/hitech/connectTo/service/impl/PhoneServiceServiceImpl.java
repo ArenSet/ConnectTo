@@ -16,8 +16,12 @@ public class PhoneServiceServiceImpl implements PhoneServiceService {
     private PhoneServiceRepository phoneServiceRepository;
 
     @Override
-    public PhoneService getByName(String name){
+    public PhoneService getByName(String name) throws NotFoundException {
         PhoneService phoneService = phoneServiceRepository.findByServiceName(name);
+
+        if (phoneService == null){
+            throw new NotFoundException("There is no any phone service with that name");
+        }
 
         return phoneService;
     }

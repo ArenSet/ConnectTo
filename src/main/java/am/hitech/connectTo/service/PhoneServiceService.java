@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public interface PhoneServiceService {
-    PhoneService getByName(String name);
+    PhoneService getByName(String name) throws NotFoundException;
 
     void addNew(PhoneServiceRequestDto requestDto);
 
